@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"DB","c":"Database","l":"Database()","url":"%3Cinit%3E()"},{"p":"DB","c":"Database","l":"getConnection()"},{"p":"DB","c":"Database","l":"getStatement()"}]
