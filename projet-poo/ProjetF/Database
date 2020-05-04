@@ -1,0 +1,146 @@
+create database if not exists projet;
+
+use projet;
+
+create table etudiants(
+id_etudiant  int(10) NOT NULL AUTO_INCREMENT,
+groupe int (10) not null,
+nom varchar(50) NOT NULL,
+prenom varchar(50) NOT NULL,
+birth_day date NOT NULL,
+sexe varchar (1) not null,
+email varchar(50) NOT NULL,
+addresse varchar(50) NOT NULL,
+ville varchar(30) NOT NULL,
+codePostal varchar(10) not null,
+pays varchar(50) NOT NULL,
+telefone varchar(20) NOT NULL,
+  PRIMARY KEY (id_etudiant)
+);
+
+create table prof(
+id_prof varchar (10) NOT NULL,
+nom varchar(50) NOT NULL,
+prenom varchar(50) NOT NULL,
+email varchar(50) NOT NULL,
+addresse varchar(50) NOT NULL,
+ville varchar(30) NOT NULL,
+codePostal varchar(10) not null,
+pays varchar(50) NOT NULL,
+telefone varchar(20) NOT NULL,
+  PRIMARY KEY (id_prof)
+);
+
+use projet;
+
+create table cours(
+id_cours varchar(10) not null,
+nom_cours varchar(50) NOT NULL,
+prof varchar(10) not null,
+primary key (id_cours),
+foreign key (prof) references prof(id_prof)
+);
+
+create table groupe (
+id_groupe int (10) not null,
+groupeName varchar(20) not null,
+primary key (id_groupe)
+);
+
+create table resultat (
+id_resultat int(10) not null,
+etudiant int(10) not null,
+points int (10) not null,
+prof varchar (10) not null,
+cours varchar (10) not null,
+primary key (id_resultat),
+foreign key (prof) references prof(id_prof),
+foreign key (cours) references cours(id_cours),
+foreign key (etudiant) references etudiants(id_etudiant)
+);
+
+
+create table suivre (
+id_etudiant int (10) not null,
+id_cours varchar (10) not null,
+primary key (id_etudiant, id_cours),
+foreign key (id_etudiant) references etudiants (id_etudiant),
+foreign key (id_cours) references cours (id_cours) 
+);
+
+
+insert into etudiants (id_etudiant, groupe, nom, prenom, birth_day, sexe, email, addresse, ville, codePostal, pays, telefone)
+values 
+('1', '3', 'HANSENNE', 'Patrik', '1998-05-02', 'M', 'hansennep@gmail.com', '78, ch. du Moulin', 'Bruxelles', '1000', 'Belgique', '0475789456'),
+('2', '3', 'MERCIER', 'Alain', '1984-11-13', 'M', 'merciera@hotmail.com', '25, rue Lemaître', 'Namur', '5000', 'Belgique', '022792211'),
+('3', '2', 'MONTI', 'Carla', '1995-07-10', 'F', 'montic@gmail.com', '5, rue Godefroid', 'Namur', '5000', 'Belgique', '0468365284'),
+('4', '2', 'BOUFAIED', 'Yacine', '1995-03-22', 'F', 'boufaied_y@hotmail.com', '65, rue du Tertre', 'Namur', '5100', 'Belgique', '0465937566'),
+('5', '1', 'DUHAUT', 'Antoine', '1993-01-07', 'M', 'duhaut_a@gmail.com', '54, rue Francois Lorge', 'Vedrin', '5020', 'Belgique', '0468321654' ),
+('6', '1', 'HULIN', 'Ludovic', '1997-02-28', 'M', 'hulin.ludovic@gmail.com', '9, rue Des Sept Voye', 'Vedrin', '5020', 'Belgique', '0497456123' );
+
+insert into prof (id_prof, nom, prenom, email, addresse, ville, codePostal, pays, telefone)
+values 
+('1', 'TRAINA', 'Karl', 'karl.traina@eicvn.be ', '40, r. Bransart', 'Namur', '5000', 'Belgique', '0465123987' ),
+('2',  'GOBIN', 'Marvin', 'marvin.gobin@outlook.com', '10, rue Saint Luc', 'Bouge', '5004', 'Belgique', '0456789123' ),
+('3', 'SMET', 'Alain', 'smet.alain@eicvn.be', '146, Chaussée de Waterloo', 'Saint-Servais', '5002', 'Belgique', '0789456123'),
+('4', 'ALARY', 'Michail', 'alary.m@eicvn.be', '354, Chaussée de Nivelles', 'Temploux', '5020', 'Belgique', '0486456123' );
+
+insert into cours (id_cours, nom_cours, prof)
+values 
+('1IP', 'Initiation à la programmation','2' ),
+('2MS', 'Mathématiques et statistiques', '1' ),
+('3SN', 'Scaling network','3' ),
+('4BP', 'Bases de la programmation','2' ),
+('5AI', 'Analyse informatique','4' ),
+('6IBD', 'Initiation aux bases de données','2' ),
+('7AIT', 'Actualisation informatique et technique','4' );
+
+insert into groupe (id_groupe, groupeName)
+values
+('1', 'Première année'),
+('2','Deuxième année' ),
+('3','Troisième année' );
+
+INSERT INTO resultat (id_resultat,cours,prof,points,etudiant)
+    VALUES 
+    (1,'2MS',1,75,5),	
+    (2,'2MS',1,55,6),
+	(3,'1IP',2,65,5),
+	(4,'1IP',2,85,6),
+	(5,'3SN',3,85,3),
+	(6,'3SN',3,65,4),
+	(7,'4BP',2,65,3),
+	(8,'4BP',2,55,4),
+	(9,'5AI',4,65,5),
+	(10,'5AI',4,65,6),
+    (11,'6IBD',2,75,1),
+	(12,'6IBD',2,95,2),
+	(13,'7AIT',4,65,1),        
+	(14,'7AIT',4,75,2);
+
+insert into suivre (id_etudiant, id_cours)
+values 
+('1', '6IBD'),
+('1', '7AIT'),
+('2', '6IBD'),
+('2', '7AIT'),
+('3', '4BP' ),
+('3', '3SN'),
+('4', '4BP' ),
+('4', '3SN'),
+('5', '1IP'),
+('5', '2MS'),
+('5', '5AI'),
+('6', '1IP'),
+('6', '2MS'),
+('6', '5AI');
+
+
+alter table etudiants add
+foreign key (groupe)
+references groupe(id_groupe);
+
+
+
+
+
