@@ -29,8 +29,8 @@ public class LinkDatabase {
 	public ArrayList<Etudiants> getAllEtudiants (){
 		try {
 			/**
-			 * Statement, pour exécuter des requêtes 
-			 * Le ResultSet contient le résultat de la requête "SELECT" !
+			 * Statement, pour exï¿½cuter des requï¿½tes 
+			 * Le ResultSet contient le rï¿½sultat de la requï¿½te "SELECT" !
 			 */
 			Statement statement = db.getStatement();
 			ResultSet rs = statement.executeQuery("SELECT * FROM etudiants");
@@ -55,7 +55,8 @@ public class LinkDatabase {
 				Etudiants etudiant = new Etudiants(id_etudiant, groupe, nom, prenom, birth_day, sexe, email,  
 						 addresse, ville, codePostal, pays, telefone);
 				liste.add(etudiant);
-			} return liste;
+			} 
+			return liste;
 		}
 			catch(Exception ex)
 			{	System.out.println("Connection failed...");
