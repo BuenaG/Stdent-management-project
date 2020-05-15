@@ -36,6 +36,31 @@ public class GestionEtudiants extends JPanel {
 	JButton clearButton = new JButton ("Reset");
 	JButton quitterButton = new JButton ("Quitter");
 	
+	JLabel id_etudiantLabel = new JLabel("ID etudiant:");
+	JLabel groupeLabel = new JLabel("Groupe:");
+	JLabel nomLabel = new JLabel("Nom:");
+	JLabel prenomLabel = new JLabel("Prenom:");
+	JLabel birth_dayLabel = new JLabel("Date de Naissance:");
+	JLabel sexeLabel = new JLabel("Sexe:");
+	JLabel emailLabel = new JLabel("Email:");
+	JLabel addresseLabel = new JLabel("Adresse:");
+	JLabel villeLabel = new JLabel("Ville:");
+	JLabel codePostalLabel = new JLabel("Code Postal:");
+	JLabel paysLabel = new JLabel("Pays:");
+	JLabel telefoneLabel = new JLabel("Telephone:");
+	
+	JTextField id_etudiantTextField = new JTextField();
+	JTextField groupeTextField = new JTextField();
+	JTextField nomTextField = new JTextField();
+	JTextField prenomTextField = new JTextField();
+	JTextField birth_dayTextField = new JTextField();
+	JTextField sexeTextField = new JTextField();
+	JTextField emailTextField = new JTextField();
+	JTextField addresseTextField = new JTextField();
+	JTextField villeTextField = new JTextField();
+	JTextField codePostalTextField = new JTextField();
+	JTextField paysTextField = new JTextField();
+	JTextField telefoneTextField = new JTextField();
 	
 	
 	ArrayList<Etudiants> listeEtudiants;
@@ -68,37 +93,12 @@ public class GestionEtudiants extends JPanel {
 		Box bv1 = Box.createVerticalBox();
 		Box bv2= Box.createVerticalBox();
 		
-		JLabel id_etudiantLabel = new JLabel("ID etudiant:");
-		JLabel groupeLabel = new JLabel("Groupe:");
-		JLabel nomLabel = new JLabel("Nom:");
-		JLabel prenomLabel = new JLabel("Prenom:");
-		JLabel birth_dayLabel = new JLabel("Date de Naissance:");
-		JLabel sexeLabel = new JLabel("Sexe:");
-		JLabel emailLabel = new JLabel("Email:");
-		JLabel addresseLabel = new JLabel("Adresse:");
-		JLabel villeLabel = new JLabel("Ville:");
-		JLabel codePostalLabel = new JLabel("Code Postal:");
-		JLabel paysLabel = new JLabel("Pays:");
-		JLabel telefoneLabel = new JLabel("Telephone:");
-		
-		JTextField id_etudiantTextField = new JTextField();
-		JTextField groupeTextField = new JTextField();
-		JTextField nomTextField = new JTextField();
-		JTextField prenomTextField = new JTextField();
-		JTextField birth_dayTextField = new JTextField();
-		JTextField sexeTextField = new JTextField();
-		JTextField emailTextField = new JTextField();
-		JTextField addresseTextField = new JTextField();
-		JTextField villeTextField = new JTextField();
-		JTextField codePostalTextField = new JTextField();
-		JTextField paysTextField = new JTextField();
-		JTextField telefoneTextField = new JTextField();
 		
 		
 		
 
-	// etudiant1 , 2 vont etre remplacé par notre base de données)
-	JList etudiants = new JList (listeEtudiants.toArray());
+	// etudiant1 , 2 vont etre remplacï¿½ par notre base de donnï¿½es)
+	JList<Etudiants> etudiants = new JList(listeEtudiants.toArray());
 	 
 	 etudiants.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	
@@ -249,32 +249,38 @@ public class GestionEtudiants extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if (e.getSource()==ajouterButton) {
-				ajouterButton.setToolTipText("Cliquez ici pour ajouter le étudiant.");
-			     MainWindow.linkDB.ajouterEtudiants(null);
-			     JList etudiants = new JList (listeEtudiants.toArray());
+				ajouterButton.setToolTipText("Cliquez ici pour ajouter le ï¿½tudiant.");
+//			     MainWindow.linkDB.ajouterEtudiants(null);//yannick
+//			     JList etudiants = new JList (listeEtudiants.toArray()); //yannick
 			// String id_etudiant, groupe, nom, prenom, birth_day, sexe, email,  addresse, ville, codePostal, pays, telefone;
-             Etudiants etudiant1=new Etudiants();
+//             Etudiants etudiant1=new Etudiants(); //yannick
            
              //etudiant1.id_etudiant=id_etudiant.getText();
+               try {
+            	String id_etudiant = id_etudiantTextField.getText();
+   				String groupe1 = groupeTextField.getText();
+   				String nom = nomTextField.getText();
+   				String prenom = prenomTextField.getText();
+   				String birth_day = birth_dayTextField.getText();
+   				String sexe = sexeTextField.getText().trim();
+   				String email = emailTextField.getText();
+   				String addresse = addresseTextField.getText();
+   				String ville = villeTextField.getText();
+   				String codePostal = codePostalTextField.getText();
+   				String pays = paysTextField.getText();
+   				String telefone = telefoneTextField.getText();
 
-			/*	String id_etudiant = id_etudiantTextField.getText();
-				String groupe1 = groupeTextField.getText();
-				String nom = nomTextField.getText();
-				String prenom = prenomgTextField.getText();
-				String birth_day = birth_dayTextField.getText();
-				String sexe = sexeTextField.getText();
-				String email = emailTextField.getText();
-				String addresse = addresseTextField.getText();
-				String ville = villeTextField.getText();
-				String codePostal = codePostalTextField.getText();
-				String pays = paysTextField.getText();
-				String telefone = telefoneTextField.getText();
-
+   				
+   				Etudiants etudiant1 = new Etudiants(id_etudiant, groupe1, nom, prenom, birth_day, sexe, email,  
+   						 addresse, ville, codePostal, pays, telefone);
+   				MainWindow.linkDB.ajouterEtudiants(etudiant1);
+   				
+            	   
+               } catch(Exception ex) {
+            	  System.out.println("Connection failed...");
+   				  System.out.println(ex);
+               }
 				
-				Etudiants etudiant1 = new Etudiants(id_etudiant, groupe, nom, prenom, birth_day, sexe, email,  
-						 addresse, ville, codePostal, pays, telefone);
-				liste.add(etudiant1);
-				*/
 			
             
              		
@@ -287,7 +293,7 @@ public class GestionEtudiants extends JPanel {
 				
 		       
 		    } else if (e.getSource() == supprimerButton) {
-		    	supprimerButton.setToolTipText("Cliquez ici pour supprimer le étudiant");
+		    	supprimerButton.setToolTipText("Cliquez ici pour supprimer le ï¿½tudiant");
 		    //	 MainWindow.linkDB.modifierEtudiants(null);
 		    	 
 		    	

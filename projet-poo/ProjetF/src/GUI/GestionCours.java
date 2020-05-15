@@ -66,7 +66,7 @@ public class GestionCours extends JPanel {
 		
 		
 
-	// etudiant1 , 2 vont etre remplacé par notre base de données)
+	// etudiant1 , 2 vont etre remplacï¿½ par notre base de donnï¿½es)
 	JList cours = new JList (listeCours.toArray());
 
 	cours.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -156,7 +156,7 @@ public class GestionCours extends JPanel {
              		public void actionPerformed(ActionEvent e) {
              			// TODO Auto-generated method stub
              			if (e.getSource()==ajouterButton) {
-             				ajouterButton.setToolTipText("Cliquez ici pour ajouter le étudiant.");
+             				ajouterButton.setToolTipText("Cliquez ici pour ajouter le ï¿½tudiant.");
              		MainWindow.linkDB.ajouterCours(null);
              				
              		
@@ -170,7 +170,7 @@ public class GestionCours extends JPanel {
              			} else if (e.getSource() == modifierButton) {
              		       
              		    } else if (e.getSource() == supprimerButton) {
-             		    	supprimerButton.setToolTipText("Cliquez ici pour supprimer le étudiant");
+             		    	supprimerButton.setToolTipText("Cliquez ici pour supprimer le ï¿½tudiant");
              		    } else if (e.getSource() == clearButton) {
              		        // do other stuff
              		    	
